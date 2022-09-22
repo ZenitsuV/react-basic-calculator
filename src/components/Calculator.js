@@ -13,6 +13,9 @@ const operators = {
   '÷': function (a, b) {
     return a / b;
   },
+  '%': function (a, b) {
+    return (a / 100) * b;
+  },
 };
 
 const Calculator = () => {
@@ -50,7 +53,7 @@ const Calculator = () => {
   };
 
   const handleCalculation = (e) => {
-    if (currentInput === '' || previousInput) return;
+    if (currentInput === '' || previousInput === '') return;
 
     const displayString = `${currentInput} ${opeartion} ${previousInput}`;
     setDisplayInput(displayString);
@@ -59,7 +62,11 @@ const Calculator = () => {
     setCurrentInput('');
     setPreviousInput('');
     setOperation('');
-    setOutput(resultValue.toFixed(2));
+    if (currentInput.includes('.') || previousInput.includes('.')) {
+      setOutput(resultValue.toFixed(2));
+    } else {
+      setOutput(resultValue.toFixed(1));
+    }
   };
 
   return (
@@ -90,9 +97,8 @@ const Calculator = () => {
       <button onClick={handleOperation}>-</button>
       <button onClick={handleInput}>.</button>
       <button onClick={handleInput}>0</button>
-      <button className="span-two" onClick={handleCalculation}>
-        =
-      </button>
+      <button onClick={handleOperation}>%</button>
+      <button onClick={handleCalculation}>=</button>
     </div>
   );
 };
