@@ -50,6 +50,8 @@ const Calculator = () => {
   };
 
   const handleCalculation = (e) => {
+    if (currentInput === '' || previousInput) return;
+
     const displayString = `${currentInput} ${opeartion} ${previousInput}`;
     setDisplayInput(displayString);
     const op = operators[opeartion];
