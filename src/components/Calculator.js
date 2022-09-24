@@ -50,7 +50,13 @@ const Calculator = () => {
   };
 
   const handleDelete = (e) => {
-    setCurrentInput('');
+    if (!previousInput && opeartion) {
+      setOperation('');
+    } else if (previousInput) {
+      setPreviousInput('');
+    } else {
+      setCurrentInput('');
+    }
   };
 
   const handleCalculation = (e) => {
