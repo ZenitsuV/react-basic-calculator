@@ -37,6 +37,7 @@ const Calculator = () => {
 
   const handleOperation = (e) => {
     const operationValue = e.target.innerHTML;
+    if (output) setOutput('');
     setOperation(operationValue);
   };
 
@@ -62,12 +63,22 @@ const Calculator = () => {
     setCurrentInput('');
     setPreviousInput('');
     setOperation('');
-    if (currentInput.includes('.') || previousInput.includes('.')) {
+    if (
+      currentInput.toString().includes('.') ||
+      previousInput.toString().includes('.')
+    ) {
       setOutput(resultValue.toFixed(2));
+      setCurrentInput(resultValue);
     } else {
-      setOutput(resultValue.toFixed(1));
+      setOutput(resultValue.toFixed(0));
+      setCurrentInput(resultValue);
     }
   };
+
+  console.log('Current - ' + currentInput);
+  console.log('Operation - ' + opeartion);
+  console.log('Previous - ' + previousInput);
+  console.log('Output = ' + output);
 
   return (
     <div className="calculator-grid">
